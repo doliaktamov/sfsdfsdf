@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <section class="section profile">
+      <div class="row">
+        <div class="col-xl-8">
+
+          <div class="card">
+            <div class="card-body pt-3">
+              <!-- Bordered Tabs -->
+              <ul class="nav nav-tabs nav-tabs-bordered">
+
+                <li class="nav-item">
+                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Информация</button>
+                </li>
+
+                <li class="nav-item">
+                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Проекты</button>
+                </li>
+
+              </ul>
+              <div class="tab-content pt-2">
+
+                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  <h5 class="card-title">Информация</h5>
+
+                  <h5 class="card-title">Детальная информация</h5>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">ФИО</div>
+                    <div class="col-lg-9 col-md-8">{{ object.fullname }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Дата Рождения</div>
+                    <div class="col-lg-9 col-md-8">{{ object.birth_date }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Должность</div>
+                    <div class="col-lg-9 col-md-8">{{ object.work_position }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Опыт</div>
+                    <div class="col-lg-9 col-md-8">{{ object.work_experience }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">ИНН</div>
+                    <div class="col-lg-9 col-md-8">{{ object.document.inn }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Опыт</div>
+                    <div class="col-lg-9 col-md-8">{{ object.document.card_id }}</div>
+                  </div>
+
+                </div>
+
+                <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                 <h5 class="card-title">Проекты</h5>
+
+                  {% for project in membership %}
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">{{ project.date_joined }}</div>
+                    <div class="col-lg-9 col-md-8">{{ project.project.name }}</div>
+                  </div>
+                  {% endfor %}
+                </div>
+
+              </div><!-- End Bordered Tabs -->
+
+            </div>
+          </div>
+
+        </div>
+        <div class="form-group">
+          <a href="{% url 'worker_delete' object.id %}" class="btn btn-danger">Удалить</a>
+          <a href="{% url 'worker_update' object.id %}" class="btn btn-warning">Изменить</a>
+        </div>
+      </div>
+    </section>
+{% endblock content %}

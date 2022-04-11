@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Datatables</h5>
+          <!-- Table with stripped rows -->
+          <table class="table datatable">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ФИО</th>
+                <th scope="col">Дата рождения</th>
+                <th scope="col">Должность</th>
+                <th scope="col">Опыт работы</th>
+                <th scope="col">ИНН</th>
+                <th scope="col">Подробнее</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for worker in object_list %}
+              <tr>
+                <th scope="row">{{worker.id}}</th>
+                <td>{{worker.fullname}}</td>
+                <td>{{worker.birth_date}}</td>
+                <td>{{worker.work_position}}</td>
+                <td>{{worker.work_experience}}</td>
+                <td>{{worker.document.inn}}</td>
+                <td><a href="{% url 'worker_detail' worker.id %}" class="btn btn-primary"> Подробнее </a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <!-- End Table with stripped rows -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock content %}

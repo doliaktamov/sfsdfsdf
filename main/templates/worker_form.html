@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="section">
+  <div class="row">
+    <div class="col-lg-6">
+
+      <div class="card">
+        <div class="card-body">
+          {% if object %}
+          <h5 class="card-title">Изменение сотрудника</h5>
+          {% else %}
+          <h5 class="card-title">Добавление сотрудника</h5>
+          {% endif %}
+          <!-- General Form Elements -->
+          <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="row mt-3">
+              <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+              </div>
+            </div>
+          </form><!-- End General Form Elements -->
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock content %}
